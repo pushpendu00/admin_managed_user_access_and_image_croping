@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table tr td {
+            border: 1px solid black;
+            text-align: center;
+            /* display: flex;
+            justify-content: center; */
+        }
+        table tr th{
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="p-0 m-0 h-[100vh] w-full">
+    <main class="h-full w-full p-2">
+        <div>
+            <a href="/admin">
+                <button class="text-[20px] m-2 px-2 py-1 border-2 border-[#6969ff] rounded-md font-semibold">Back</button>
+            </a>
+        </div>
+        <table>
+            <tr>
+                <th>User Id</th>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Action</th>
+            </tr>
+            <%for(user of users){%>
+                <tr>
+                    <td><%= user.userId %></td>
+                    <td><%= user.name %></td>
+                    <td class="align-middle p-2"><img class="h-[70px] w-[70px]" src="<%if(user.avatar !== ''){%> <%= user.avatar %> <%}else{%> ../uploads/avatar/default-avatar.png <%}%>" alt="photo"></td> <br>
+                    <td class="justify-center items-center">
+                        <%if(user.accepted == false){%>
+                            <button onclick="Accepted_Fun('<%=user.userId%>')" class="text-[16px] m-2 px-2 py-1 border-2 border-[#6969ff] rounded-md font-semibold">Done</button>
+                        <%}%>
+                        <button onclick="Delete_Fun('<%=user.userId%>')" class="text-[16px] px-2 py-1 border-2 border-[#f86464] rounded-md font-semibold">Delete</button>
+                    </td>
+                </tr>
+            <% } %>
+        </table>
+    </main>
+
+    <script src="/js/admin-view.js"></script>
+</body>
+</html>

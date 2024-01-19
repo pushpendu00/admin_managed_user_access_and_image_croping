@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-0 m-0 h-[100vh] w-full">
+    <main class="h-full w-full absolute bg-gray-300">
+        <div class="h-[4rem] w-full flex justify-end items-center">
+            <button onclick="open_view_fun()" class="h-3/4 px-4 py-1 rounded-lg text-[#fff] text-[18px] bg-slate-600 mr-5">View</button>
+            <a class="h-full flex items-center" href="/logout"><button class="h-3/4 bg-red-500 hover:bg-red-600 text-[#fff] text-[18px] px-4 py-1 rounded-md mr-5">Log Out</button></a>
+        </div>
+        <div class="h-[calc(100%-4rem)] w-full flex flex-col justify-center items-center">
+            <form action="/user/upload" enctype="multipart/form-data" method="post" class="w-[230px] flex flex-col gap-5">
+                <div class="w-full">
+                    <span class="text-[20px]">Name</span> <br>
+                    <input id="name" name="name" required type="text" class="w-full p-2 border-2 border-black rounded-md bg-transparent" placeholder="Name">
+                </div>
+                <div class="w-full">
+                    <span class="text-[20px]">Photo</span> <br>
+                    <div id="image-input-label" class="w-full">
+                        <label class="w-full" for="image-input">
+                            <div class="w-full flex items-center justify-center cursor-pointer aspect-square border-2 border-black border-dashed rounded-md">
+                                <i class="fa-solid fa-plus fa-xl" style="color: #000000;"></i>
+                                <span class="text-[20px]">&nbsp;Add Photo</span>
+                                <input id="image-input" type="file" name="uploadPhoto" required hidden onchange="chenge_image_Fun()">
+                            </div>
+                        </label>
+                    </div>
+                    <div id="show-input-image" class="relative hidden overflow-y-scroll w-full aspect-square border-2 border-black border-dashed rounded-md">
+                        <img src="" class="w-full" alt="photo">
+                        <div onclick="cancel_photo_fun()" class="h-5 w-5 flex items-center justify-center absolute top-2 right-2 cursor-pointer rounded-full bg-red-400 hover:bg-red-500 text-[#fff]">X</div>
+                    </div>
+
+                </div>
+                <button type="submit" class="w-full py-2 text-[25px] text-[#fff] border-2 border-black rounded-lg bg-blue-600 hover:bg-blue-700">Upload</button>
+            </form>
+        </div>
+    </main>
+    <div id="view-div" class="hidden w-full h-full relative z-10 justify-end">
+        <div class="h-full w-full md:w-2/5 bg-[#fff] p-2">
+            <div class="" onclick="close_view_fun()">
+                <button class="bg-red-500 hover:bg-red-600 cursor-pointer m-5 px-3 py-1 text-[18px] text-[#fff] rounded-lg">Close</button>
+            </div>
+            <div class="w-full text-[20px] flex flex-col items-center gap-5">
+                <div>Name : <%= user.name %> </div>
+                <div>
+                    <img class="w-60 h-auto" src="<%if(user.avatar !== ''){%> <%= user.avatar %> <%}else{%> ../uploads/avatar/default-avatar.png <%}%>" alt="photo">
+                </div>
+                <% if(user.accepted == true){ %>
+                    <div class="text-green-600">Accepted by Admin</div>
+                <% }else{ %>
+                    <div class="text-[#ef4c4c]">Not Accepted by Admin</div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/user.js"></script>
+</body>
+</html>

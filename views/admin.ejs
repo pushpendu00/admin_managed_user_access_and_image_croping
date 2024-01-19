@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="m-0 p-0 w-full h-[100vh] bg-gray-300">
+    <div class="h-[50px] w-full flex justify-end items-center">
+        <a href="/logout"><button class="bg-red-500 hover:bg-red-600 text-[#fff] mr-5 p-2 rounded-md">Log Out</button></a>
+    </div>
+    <main class="h-[cals(100vh-50px)] w-full md:flex">
+        <div class="md:h-full md:w-[50%] h-2/5 w-full p-2 flex flex-col items-center justify-center gap-2 border-b-2 md:border-r-2 border-gray-400">
+            <p class="md:mb-10 mb-2 text-[30px]">Create User</p>
+            <div class="w-full flex flex-col items-center justify-center gap-2 md:gap-6">
+                <div class="w-3/5">
+                    <label for="create-user-id" class="text-[20px]">User Id</label><br>
+                    <input class="p-2 w-full rounded-lg" id="create-user-id" type="number" placeholder="User Id" required> 
+                </div>
+                <div class="w-3/5">
+                    <label for="create-user-password" class="text-[20px]">Password</label><br>
+                    <input class="p-2 w-full rounded-lg" id="create-user-password" type="password" placeholder="Password" required>
+                </div>
+                <button onclick="createUserFun()" class="w-3/5 p-2 rounded-lg text-white text-[20px] bg-blue-600 hover:bg-blue-700">Submit</button>
+            </div>
+        </div>
+        <div class="md:h-full md:w-[50%] h-3/5 w-full p-2 flex flex-col items-center justify-center">
+            <p class="md:mb-10 mb-2 text-[30px]">View user</p>
+            <form action="/admin/view" method="post" class="w-full flex flex-col items-center justify-center gap-5 md:gap-6">
+                <input name="userId1" class="border-2 border-black rounded-lg p-2 w-3/5" type="number" id="view-userId1" placeholder="User Id" >
+                <input name="userId2" class="border-2 border-black rounded-lg p-2 w-3/5" type="number" id="view-userId2" placeholder="User Id" >
+                <!-- <input type="button" class="px-3 py-1 text-[20px] rounded-lg bg-green-600 hover:bg-green-700 cursor-pointer text-[#fff]" disabled value="View"> -->
+                <button id="view-btn" class=" opacity-50 cursor-not-allowed px-3 py-1 text-[20px] rounded-lg bg-green-600 text-[#fff]" disabled>View</button>
+            </form>
+        </div>
+    </main>1 
+    <script src="/js/admin.js"></script>
+</body>
+</html>
